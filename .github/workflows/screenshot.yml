@@ -1,0 +1,23 @@
+name: daily capture
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: install puppeteer-headful
+      uses: mujo-code/puppeteer-headful@master
+      env:
+        CI: 'true'
+    - name: screenshots
+      uses: flameddd/screenshots-ci-action@v1.1.1
+      with:
+        url: https://RehearsalMinorPillow.graysonhay.repl.co
+    - uses: actions/upload-artifact@v2
+      with:
+        path: screenshots
+        name: Download-screenshots
